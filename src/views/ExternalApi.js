@@ -5,8 +5,6 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import config from "../auth_config.json";
 import Loading from "../components/Loading";
 
-const { apiOrigin = "http://localhost:3001" } = config;
-
 export const ExternalApiComponent = () => {
   const [state, setState] = useState({
     showResult: false,
@@ -57,8 +55,9 @@ export const ExternalApiComponent = () => {
   const callApi = async () => {
     try {
       const token = await getAccessTokenSilently();
-
-      const response = await fetch(`${apiOrigin}/api/external`, {
+debugger
+      const response = await fetch(`${config.apiEndpoint}`, {
+        
         headers: {
           Authorization: `Bearer ${token}`,
         },

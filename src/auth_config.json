@@ -1,5 +1,6 @@
 {
   "domain": "dk-playground.auth0.com",
   "clientId": "htlAxxrL3sxsTYL7SfJbR5UURuDsCJVa",
-  "audience": "https://api.one"
+  "audience": "https://api.one",
+  "apiEndpoint": "https://dikoga-eval-test.apigee.net/quizz"
 }
