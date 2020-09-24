@@ -3,15 +3,12 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "spa": "react-scripts start",
-    "server": "node server.js",
-    "server:dev": "nodemon server.js",
-    "dev": "npm-run spa",
-    "prod": "npm-run server"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.0.0",
