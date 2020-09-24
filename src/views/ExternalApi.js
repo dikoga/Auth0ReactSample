@@ -4,6 +4,8 @@ import Highlight from "../components/Highlight";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import config from "../auth_config.json";
 import Loading from "../components/Loading";
+import request from 'request';
+
 
 export const ExternalApiComponent = () => {
   const [state, setState] = useState({
@@ -53,29 +55,63 @@ export const ExternalApiComponent = () => {
   };
 
   const callApi = async () => {
-    try {
-      const token = await getAccessTokenSilently();
-debugger
-      const response = await fetch(`${config.apiEndpoint}`, {
+    const token = await getAccessTokenSilently();
+
+    const options = {
+      url: `${config.apiEndpoint}`,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+      rejectUnauthorized: false
+    };
+
+    request(options, function (error, response, body) {
+      debugger
+
+      console.error('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+      console.log('body:', body); // Print the HTML for the Google homepage.
+
+      if(response && response.statusCode === 200){
+        setState({
+          ...state,
+          showResult: true,
+          apiMessage: body,
+        });
+      }else{
+        setState({
+          ...state,
+          showResult: true,
+          apiMessage: error
+        });
+      }
+    });
+
+
+//     try {
+//       const token = await getAccessTokenSilently();
+// debugger
+//       const response = await fetch(`${config.apiEndpoint}`, {
         
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+//         // headers: {
+//         //   Authorization: `Bearer ${token}`,
+//         // },
+//       });
 
-      const responseData = await response.json();
+//       const xxx = await response;
+//       const responseData = xxx.json();
 
-      setState({
-        ...state,
-        showResult: true,
-        apiMessage: responseData,
-      });
-    } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
-    }
+//       setState({
+//         ...state,
+//         showResult: true,
+//         apiMessage: responseData,
+//       });
+//     } catch (error) {
+//       setState({
+//         ...state,
+//         error: error.error,
+//       });
+//     }
   };
 
   const handle = (e, fn) => {
