@@ -1,6 +1,0 @@
-{
-  "domain": "dk-playground.auth0.com",
-  "clientId": "htlAxxrL3sxsTYL7SfJbR5UURuDsCJVa",
-  "audience": "https://dikoga-eval-test.apigee.net/v0/hello",
-  "apiEndpoint": "https://dikoga-eval-test.apigee.net/v0/hello"
-}
